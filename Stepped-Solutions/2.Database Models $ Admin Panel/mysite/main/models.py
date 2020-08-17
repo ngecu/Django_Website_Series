@@ -14,20 +14,8 @@ class TutorialSeries(models.Model):
 
 	def __str__(self):
 		return self.tutorial_series
-
-
-class Tutorial(models.Model):
-	tutorial_series = models.ForeignKey(TutorialSeries, on_delete=models.CASCADE,blank=True, null=True)
-	tutorial_title = models.CharField(max_length=200)
-	tutorial_content = models.TextField()
-	tutorial_published = models.DateTimeField("date published", default=datetime.now(),blank=True, null=True)
-	image = models.URLField(max_length=200,blank=True, null=True)
 	
-	def __str__(self):
-		return self.tutorial_title
 
-
-# Create your models here.
 class Archive(models.Model):
 	archive_title = models.CharField(max_length=200)
 	archive_description = models.CharField(max_length=200)
@@ -37,7 +25,23 @@ class Archive(models.Model):
 	def __str__(self):
 		return self.archive_title
 
+class Subscription(models.Model):
+	email = models.EmailField(blank=True, null=True)
+	created_on = models.DateTimeField(auto_now_add=True,blank=True, null=True )
 
+
+	def __str__(self):
+		return self.email	
+	
+class Tutorial(models.Model):
+	tutorial_series = models.ForeignKey(TutorialSeries, on_delete=models.CASCADE,blank=True, null=True)
+	tutorial_title = models.CharField(max_length=200)
+	tutorial_content = models.TextField()
+	tutorial_published = models.DateTimeField("date published", default=datetime.now(),blank=True, null=True)
+	image = models.URLField(max_length=200,blank=True, null=True)
+	
+	def __str__(self):
+		return self.tutorial_title
 
 
 class Comment(models.Model):
@@ -70,11 +74,5 @@ class Dislike(models.Model):
         return str(self.comment)
 
 
-class Subscription(models.Model):
-	email = models.EmailField(blank=True, null=True)
-	created_on = models.DateTimeField(auto_now_add=True,blank=True, null=True )
 
-
-	def __str__(self):
-		return self.email
 
