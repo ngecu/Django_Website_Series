@@ -9,8 +9,7 @@ class TutorialSeries(models.Model):
 	video_url = models.URLField(max_length=200,blank=True, null=True)
 	series_published = models.DateTimeField("date published", default=datetime.now(),blank=True, null=True)
 
-	class Meta:
-		verbose_name_plural = "Series"
+
 
 	def __str__(self):
 		return self.tutorial_series
@@ -48,9 +47,6 @@ class Comment(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True,blank=True, null=True)
 
 
-
-	class Meta:
-		ordering = ['created_on']
 
 	def __str__(self):
 		return 'Comment by {} of {}-{}'.format(self.name, self.email,self.created_on)
