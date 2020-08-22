@@ -3,6 +3,7 @@
 from django.db import models
 #Our model class will then inherit from models dot Model where the class is named “TutorialSereis”
 class TutorialSeries(models.Model):
+<<<<<<< HEAD
 	#For the model fields,we have series name,series summary,series image,3source code url,video url
 	tutorial_series_name = 
 	series_summary = 
@@ -30,6 +31,11 @@ class TutorialSeries(models.Model):
 	# Also a true blank attribute to allow us to leave the field empty at any time. 
 	tutorial_series_name = models.CharField(max_length=200,blank=True, null=True)
 	series_summary = models.CharField(max_length=200,blank=True, null=True)
+=======
+	tutorial_series_name = models.CharField(max_length=200,blank=True, null=True)
+	series_summary = models.CharField(max_length=200,blank=True, null=True)
+# 	series_image = models.URLField(max_length=200,blank=True, null=True)
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
 	source_code = models.URLField(max_length=200,blank=True, null=True)
 	video_url = models.URLField(max_length=200,blank=True, null=True)
 	date_published = models.DateTimeField("date published", default=datetime.now(),blank=True, null=True)	
@@ -40,6 +46,7 @@ class TutorialSeries(models.Model):
 # live demo url is of url field and image of image type.
 # I’ll also comment the image attribute.
 
+<<<<<<< HEAD
 class Archive(models.Model):
 	archive_title = models.CharField(max_length=200)
 	archive_description = models.CharField(max_length=200)
@@ -103,6 +110,11 @@ class TutorialSeries(models.Model):
 
 	def __str__(self):
 		return self.tutorial_series
+=======
+	def __str__(self):
+		return self.tutorial_series
+	
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
 
 class Archive(models.Model):
 	archive_title = models.CharField(max_length=200)
@@ -113,7 +125,12 @@ class Archive(models.Model):
 	def __str__(self):
 		return self.archive_title
 
+class Subscription(models.Model):
+	email = models.EmailField(blank=True, null=True)
+	created_on = models.DateTimeField(auto_now_add=True,blank=True, null=True )
 
+
+<<<<<<< HEAD
 class Subscription(models.Model):
 	email = models.EmailField(blank=True, null=True)
 	created_on = models.DateTimeField(auto_now_add=True,blank=True, null=True )
@@ -122,6 +139,11 @@ class Subscription(models.Model):
 	def __str__(self):
 		return self.email	
 
+=======
+	def __str__(self):
+		return self.email	
+	
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
 class Tutorial(models.Model):
 	#tutorial_series = models.ForeignKey(TutorialSeries, on_delete=models.CASCADE,blank=True, null=True)
 	tutorial_title = models.CharField(max_length=200)
@@ -131,7 +153,10 @@ class Tutorial(models.Model):
 	
 	def __str__(self):
 		return self.tutorial_title
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
 
 
 class Comment(models.Model):
@@ -150,16 +175,35 @@ class Comment(models.Model):
 		return 'Comment by {} of {}-{}'.format(self.name, self.email,self.created_on)
 
 
+<<<<<<< HEAD
 
 # class Like(models.Model):
+#     comment = models.ForeignKey(Comment,null=True,on_delete=models.SET_NULL)
+=======
+# class Like(models.Model):
+#     comment = models.ForeignKey(Comment,null=True,on_delete=models.SET_NULL)
+
+#     def __str__(self):
+#         return str(self.comment)
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
+
+#     def __str__(self):
+#         return str(self.comment)
+
+<<<<<<< HEAD
+
+# class Dislike(models.Model):
+#     comment = models.ForeignKey(Comment,null=True,on_delete=models.SET_NULL)
+=======
+# class Dislike(models.Model):
 #     comment = models.ForeignKey(Comment,null=True,on_delete=models.SET_NULL)
 
 #     def __str__(self):
 #         return str(self.comment)
 
 
-# class Dislike(models.Model):
-#     comment = models.ForeignKey(Comment,null=True,on_delete=models.SET_NULL)
+
+>>>>>>> 08440934c726c07684b51be0f479d7b25d424053
 
 #     def __str__(self):
 #         return str(self.comment)
