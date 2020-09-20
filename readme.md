@@ -171,3 +171,131 @@ Awesome! So this editor allows us to more easily write HTML, insert code snippet
 While we're here, let's go ahead and add a quick tutorial with a code snippet just for kicks. Put whatever you want, give it a title, and save.
 
 Let's now head back to our views to learn how our views can interact with our models, as well as how the Django templating works for displaying and working with python objects inside of HTML templates
+
+# URLS AND VIEWS
+
+![Test Image 1](views&urls.png)
+
+In this video am going to cover the concept of url routing in django & how urls and views work together to return templates to a user.
+
+So when a user asks for a URL,django matches the request against its urls.py file.
+
+ If a match is found, Django moves on to the view that’s associated with the URL. Views are generally found inside each app in the views.py file.
+
+ The view generally handles all the database manipulation. It grabs data and passes it on.
+
+ A template (specified in the view) then displays that data.
+
+ for example if we go to the project's urls.py file,under the urls pattern array object,we find a path indicating a string of "admin/".
+ ```
+ urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+ ```
+ This line means that for every URL that starts with admin/, Django will find a corresponding view. 
+
+ Lets now create our own urls to route us to the requests.
+
+ ----------------------------
+
+ The first route we can start with is the landing page or call it the index page of our website.So we need to replace the django default start page.
+
+ Howerver,We also want to keep the mysite/urls.py file clean, so we will import URLs from our main app to the main mysite/urls.py file.This is so since we can create an app with multiple apps,hence this ensures that every routing system of every app is isolated and treated independently.
+
+ Go ahead, add a line that will import blog.urls. You will also need to change the from django.urls… line because we are using the include function here, so you will need to add that import to the line.
+
+ ```
+ .....
+ from django.urls import path,include
+ ......
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('main.urls')),
+    path('tinymce/', include('tinymce.urls')),
+]
+ ```
+Now Django will now redirect everything that comes into 'http://127.0.0.1:8000/' to main.urls and looks for further instructions there.
+
+Alright,since every route is being redirected to the urls.py file inside our main app,we need to create the file and add these two lines.Ill just copy paste them.
+```
+from django.urls import path
+from . import views
+```
+Here we're importing Django's function path and all of our views from the main application.We don't have any yet, but we will get to that in a minute
+
+After that, we can add our first URL pattern:
+```
+urlpatterns = [
+path("",views.homepage,name="homepage"),
+]
+```
+
+After installing Linux from a bootable USB, the USB drive is likely not to work correctly. 
+This is due to incorrect partitioning when a bootable flag is added to a USB flash drive. However, it is easy to fix.
+
+So, let us fix that problem.
+
+-----------------------------
+# 1. FIND THE NAME OF THE DEVICE
+
+You can find it in the Disks program.
+So, my flash drive has the name sbd.
+
+Depending on how many drives you have in your system, your flash drive name can differ. The name can also change depending on the order you connect your drives. So, it is very important to check your USB flash drive name every time you are about to do anything with its file system.
+
+# 2. Find the name of the device in the Terminal
+
+You can also check it this name in the command line too. Just need to run this command:
+
+```
+sudo fdisk -l
+```
+
+You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 15 Gbs so it has the name sdb.
+
+Now that the problems have been identified, it is possible to start with the solution.
+
+It basically consists of deleting the entire file system from the USB device and then formatting it with a new filesystem.
+
+# 3.Wipe the filesystem from your flash drive
+
+First, you need to completely wipe the filesystem from your flash drive to restore it to its original state. You run this command to wipe the filesystem from your flash drive:
+```
+sudo wipefs --all /dev/sdb
+```
+
+Now, the filesystem has been wiped and the flash drive is completely clean. You can check that with:
+```
+sudo fdisk -l
+```
+
+You should see that the USB flash device has no partition. You need to create one.
+
+For this there are two options, you can use the terminal or a graphical application. I will show you how to do it both ways.
+
+# 4.Create the new partition using the command line
+
+Let us first do the command-line way. For this, I will use the cfdisk tool. So, you need to run this command:
+```
+sudo cfdisk /dev/sdb
+```
+Again, sdb is the name of my flash drive. Replace it with yours.
+
+First, you need to select dos option and press Enter.
+
+Next, press Enter on the new option to create a partition.
+
+Next, you have to define the size. By default, it suggests creating the maximum possible size. So, this is what we want:
+
+Then, select the primary option to make the partition primary.
+
+Now, apply the changes by selecting and pressing Enter on the Write option:
+
+In the end, the program will ask you for confirmation. Type yes and press Enter.
+
+After the program has finished the process, select quit and press Enter to close the program.
+
+Now, we have a flash drive with a new partition table.
+
+Now you know how to format a bootable USB to normal but you can use this method to recover any other USB flash drive which stopped working or does not work correctly most likely you will be able to restore this flash drive to its normal state and it will start working as a new.
