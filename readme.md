@@ -252,11 +252,13 @@ You can also check it this name in the command line too. Just need to run this c
 sudo fdisk -l
 ```
 
-You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 15 Gbs so it has the name sdb.
+Acording to "Linux Utility CookBook",The fdisk program is used to manipulate the disk partition table. You can create, modify, and remove partitions with this utility.
 
-Now that the problems have been identified, it is possible to start with the solution.
+You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 7.5gbs so it has the name sdb.
 
-It basically consists of deleting the entire file system from the USB device and then formatting it with a new filesystem.
+since we have identified our problem,we should now start working on the solution.
+
+To solve this,we need to delete the entire file system from the device and then write a new file system,so step three is about wiping the drive.
 
 # 3.Wipe the filesystem from your flash drive
 
@@ -264,6 +266,7 @@ First, you need to completely wipe the filesystem from your flash drive to resto
 ```
 sudo wipefs --all /dev/sdb
 ```
+the command "wipefs" can erase filesystem, raid or partition-table signatures (magic strings) from the specified device to make the signatures invisible for libblkid. wipefs does not erase the filesystem itself nor any other data from the device.
 
 Now, the filesystem has been wiped and the flash drive is completely clean. You can check that with:
 ```
@@ -272,11 +275,10 @@ sudo fdisk -l
 
 You should see that the USB flash device has no partition. You need to create one.
 
-For this there are two options, you can use the terminal or a graphical application. I will show you how to do it both ways.
 
 # 4.Create the new partition using the command line
 
-Let us first do the command-line way. For this, I will use the cfdisk tool. So, you need to run this command:
+For this, I will use the cfdisk tool. So, you need to run this command:
 ```
 sudo cfdisk /dev/sdb
 ```
