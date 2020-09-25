@@ -246,15 +246,60 @@ from django.http import HttpResponse
 ```
 Next, i'll define a function called Homepage. This is the view function.According to django documentation,Each view function takes an HttpRequest object as its first parameter, which is  named request.
 
+<<<<<<< HEAD
+=======
+Acording to "Linux Utility CookBook",The fdisk program is used to manipulate the disk partition table. You can create, modify, and remove partitions with this utility.
+
+You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 7.5gbs so it has the name sdb.
+
+since we have identified our problem,we should now start working on the solution.
+
+To solve this,we need to delete the entire file system from the device and then write a new file system,so step three is about wiping the drive.
+
+# 3.Wipe the filesystem from your flash drive
+
+First, you need to completely wipe the filesystem from your flash drive to restore it to its original state. You run this command to wipe the filesystem from your flash drive:
+>>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
 ```
 def Homepage(request):
     return HttpResponse("this is the homepage")
 ```
+the command "wipefs" can erase filesystem, raid or partition-table signatures (magic strings) from the specified device to make the signatures invisible for libblkid. wipefs does not erase the filesystem itself nor any other data from the device.
 
+<<<<<<< HEAD
 So lets try running our server.As you can see it rendered the response requested through routing."this is the homepage"
+=======
+Now, the filesystem has been wiped and the flash drive is completely clean. You can check that with:
+```
+sudo fdisk -l
+```
+
+You should see that the USB flash device has no partition. You need to create one.
+
+
+# 4.Create the new partition using the command line
+
+For this, I will use the cfdisk tool. So, you need to run this command:
+```
+sudo cfdisk /dev/sdb
+```
+Again, sdb is the name of my flash drive. Replace it with yours.
+
+First, you need to select dos option and press Enter.
+
+Next, press Enter on the new option to create a partition.
+
+Next, you have to define the size. By default, it suggests creating the maximum possible size. So, this is what we want:
+
+Then, select the primary option to make the partition primary.
+>>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
 
 We now need to render a template response since they return responses that are dynamic and can be easily altered,unlike the static http response.What i mean with template response is returning an actual html page as the object returned.
 
 
 
 
+<<<<<<< HEAD
+=======
+Now you know how to format a bootable USB to normal but you can use this method to recover any other USB flash drive which stopped working or does not work correctly most likely you will be able to restore this flash drive to its normal state and it will start working as a new.
+>>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
