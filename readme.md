@@ -91,6 +91,8 @@ Ok,so that just created the relationship,lets relaunch our server to test it out
 So if i create a new tutorial,you can see up here i can select a series to associate with.It list the available series in the database.This is so since we have set the tutorial must be associated with the series model.
 Yeah,that's it for this video.Thanks for watching.
 
+----------------------------------------------------------------------
+
 ![Test Image 1](admin_panel_view.png)
 Hi guys,in this video will explore on ways we can customize the admin panel to allow us organize how this model is presented to us. It's not always the case that the order of the columns in the table is what we prefer.
 
@@ -99,7 +101,7 @@ Also we need to customize the tutorial content field into a text editor, for us 
 ---------------------------------------------------------------------------------
 
 
-One thing my tutorials desperately could use is an editor, not really just some text field. I can write HTML in here, sure, but that would be rather tedious, especially if I made some error and then I wouldn't see it until I push to publish it! Instead, I would like a WYSIWYG ie.what you see is what you get) editor. Luckily many of these exist within the Django ecosystem. The one I will make use of is a branch off of TinyMCE. To get it, we just need to do:
+One thing my tutorials could use is an editor, not just some text field.I would like a what you see is what you get editor. Luckily many of these exist within the Django ecosystem. The one I will make use of is a branch off of TinyMCE. To get it, we just need to do:
 ```
 pip3 install django-tinymce4-lite.
 ```
@@ -144,7 +146,8 @@ TINYMCE_DEFAULT_CONFIG = {
 ```
 Next thing we need to do is to point our app to tinymce because our widgets will call upon tinymce to work
 
-o do this, let's now edit mysite/mysite/urls.py
+To do this, let's now edit mysite/mysite/urls.py
+
 ```
 urlpatterns = patterns('',
     ...
@@ -152,7 +155,7 @@ urlpatterns = patterns('',
     ...
 )
 ```
-Finally, we just need to make use of TinyMCE where we want it. To do this, we need to override a form to use our TinyMCE widget. In this case, it's not just any form, however, we want to use it within the admin page. To do this, go back into our mysite/main/admin.py file, and add the follwowing imports:
+Finally, we just need to make use of TinyMCE where we want it. To do this, we need to override a form to use our TinyMCE widget. In this case, it's not just any form, however, we want to use it within the admin page. To do this, go back into our mysite/main/admin.py file, and add the following imports:
 ```
 from tinymce.widgets import TinyMCE
 ```
@@ -166,7 +169,7 @@ The first is for our widget, the second is so we can override one of our models 
 
 So ill refresh the admin panel page to execute the changes
 
-Awesome! So this editor allows us to more easily write HTML, insert code snippets and many other things.We can also view the raw HTML and insert our own custom HTML as well if something we want doesn't exist in the editor.
+Awesome! So this editor allows us to easily write HTML, insert code snippets and many other things.We can also view the raw HTML and insert our own custom HTML as well if something we want doesn't exist in the editor.
 
 While we're here, let's go ahead and add a quick tutorial with a code snippet just for kicks. Put whatever you want, give it a title, and save.
 
@@ -176,7 +179,7 @@ Let's now head back to our views to learn how our views can interact with our mo
 
 ![Test Image 1](views&urls.png)
 
-In this video am going to cover the concept of url routing in django & how urls and views work together to return templates to a user.
+Hi guys,In this video am going to cover the concept of url routing in django & how urls and views work together to return templates to a user.
 
 So when a user asks for a URL,django matches the request against its urls.py file.
 
@@ -225,77 +228,33 @@ from . import views
 Here we're importing Django's function path and all of our views from the main application.We don't have any yet, but we will get to that in a minute
 
 After that, we can add our first URL pattern:
+
 ```
 urlpatterns = [
-path("",views.homepage,name="homepage"),
+path("",views.Homepage),
 ]
 ```
 
-After installing Linux from a bootable USB, the USB drive is likely not to work correctly. 
-This is due to incorrect partitioning when a bootable flag is added to a USB flash drive. However, it is easy to fix.
+The path method takes in the first parameter as the route,which is also the address.for our case is the empty string meaning it is the homepage.The second parameter is the view function,which is the function to be triggered when we route to that address.The third is kwargs argument that allows additional arguments to the view function.Lastly is the name which we may cover later.
 
-So, let us fix that problem.
+Now since we imposed a view function called homepage on the view file,we need to define the function.So ill go to the views.py file.
 
------------------------------
-# 1. FIND THE NAME OF THE DEVICE
-
-You can find it in the Disks program.
-So, my flash drive has the name sbd.
-
-Depending on how many drives you have in your system, your flash drive name can differ. The name can also change depending on the order you connect your drives. So, it is very important to check your USB flash drive name every time you are about to do anything with its file system.
-
-# 2. Find the name of the device in the Terminal
-
-You can also check it this name in the command line too. Just need to run this command:
+First, i'll import the class HttpResponse from the django.http module,
 
 ```
-sudo fdisk -l
+from django.http import HttpResponse
+```
+Next, i'll define a function called Homepage. This is the view function.According to django documentation,Each view function takes an HttpRequest object as its first parameter, which is  named request.
+
+```
+def Homepage(request):
+    return HttpResponse("this is the homepage")
 ```
 
-You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 15 Gbs so it has the name sdb.
+So lets try running our server.As you can see it rendered the response requested through routing."this is the homepage"
 
-Now that the problems have been identified, it is possible to start with the solution.
+We now need to render a template response since they return responses that are dynamic and can be easily altered,unlike the static http response.What i mean with template response is returning an actual html page as the object returned.
 
-It basically consists of deleting the entire file system from the USB device and then formatting it with a new filesystem.
 
-# 3.Wipe the filesystem from your flash drive
 
-First, you need to completely wipe the filesystem from your flash drive to restore it to its original state. You run this command to wipe the filesystem from your flash drive:
-```
-sudo wipefs --all /dev/sdb
-```
 
-Now, the filesystem has been wiped and the flash drive is completely clean. You can check that with:
-```
-sudo fdisk -l
-```
-
-You should see that the USB flash device has no partition. You need to create one.
-
-For this there are two options, you can use the terminal or a graphical application. I will show you how to do it both ways.
-
-# 4.Create the new partition using the command line
-
-Let us first do the command-line way. For this, I will use the cfdisk tool. So, you need to run this command:
-```
-sudo cfdisk /dev/sdb
-```
-Again, sdb is the name of my flash drive. Replace it with yours.
-
-First, you need to select dos option and press Enter.
-
-Next, press Enter on the new option to create a partition.
-
-Next, you have to define the size. By default, it suggests creating the maximum possible size. So, this is what we want:
-
-Then, select the primary option to make the partition primary.
-
-Now, apply the changes by selecting and pressing Enter on the Write option:
-
-In the end, the program will ask you for confirmation. Type yes and press Enter.
-
-After the program has finished the process, select quit and press Enter to close the program.
-
-Now, we have a flash drive with a new partition table.
-
-Now you know how to format a bootable USB to normal but you can use this method to recover any other USB flash drive which stopped working or does not work correctly most likely you will be able to restore this flash drive to its normal state and it will start working as a new.
