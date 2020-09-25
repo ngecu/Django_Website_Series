@@ -246,60 +246,75 @@ from django.http import HttpResponse
 ```
 Next, i'll define a function called Homepage. This is the view function.According to django documentation,Each view function takes an HttpRequest object as its first parameter, which is  named request.
 
-<<<<<<< HEAD
-=======
-Acording to "Linux Utility CookBook",The fdisk program is used to manipulate the disk partition table. You can create, modify, and remove partitions with this utility.
 
-You will see all the partitions of your system as output of this command. So, you need to find your flash drive based on its size. For example, I know that my flash drive is 7.5gbs so it has the name sdb.
-
-since we have identified our problem,we should now start working on the solution.
-
-To solve this,we need to delete the entire file system from the device and then write a new file system,so step three is about wiping the drive.
-
-# 3.Wipe the filesystem from your flash drive
-
-First, you need to completely wipe the filesystem from your flash drive to restore it to its original state. You run this command to wipe the filesystem from your flash drive:
->>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
 ```
 def Homepage(request):
     return HttpResponse("this is the homepage")
 ```
 the command "wipefs" can erase filesystem, raid or partition-table signatures (magic strings) from the specified device to make the signatures invisible for libblkid. wipefs does not erase the filesystem itself nor any other data from the device.
 
-<<<<<<< HEAD
-So lets try running our server.As you can see it rendered the response requested through routing."this is the homepage"
-=======
-Now, the filesystem has been wiped and the flash drive is completely clean. You can check that with:
-```
-sudo fdisk -l
-```
 
-You should see that the USB flash device has no partition. You need to create one.
-
-
-# 4.Create the new partition using the command line
-
-For this, I will use the cfdisk tool. So, you need to run this command:
-```
-sudo cfdisk /dev/sdb
-```
-Again, sdb is the name of my flash drive. Replace it with yours.
-
-First, you need to select dos option and press Enter.
-
-Next, press Enter on the new option to create a partition.
-
-Next, you have to define the size. By default, it suggests creating the maximum possible size. So, this is what we want:
-
-Then, select the primary option to make the partition primary.
->>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
 
 We now need to render a template response since they return responses that are dynamic and can be easily altered,unlike the static http response.What i mean with template response is returning an actual html page as the object returned.
 
 
+--------------------------------------------------------------------------------------------
+
+Hi guys,recently i have been trying the adobe sequence programs specifically on the after effects and photoshop.I tried my first learning example by creating an audio visualizer that plays at the beginning of thus video.I created the animation for my featuring youtube channel,deejay nyash,do check it out.
+
+I must say media design and customiztion is no easy job.Especially when starting out.It needs alot of patience and resilience.
+If i recall well of an african proverb,quote on quote "Smooth seas do not make skillful sailors."In this video i want to quickly go thru the steps i took or better yet the struggles i had in starting out After Effect Audio spectrum visualizer.
+
+-------------------------------------
+
+first i needed a logo of which i got a good design in canva.Canva is a design website where you just drag and drop objects for customiztion of its featurs.After few edits,i downloaded a transparent background png.
+
+Next is on the after effect app.This is where the video was quite handy.So i created a new composition with its default settings.The duration of the composition should be equal to your audio.
+
+Then I imported the logo,a background image and an audio to sync the visualizer.
+
+Drag all the files except for the background image to the timeline panel below
+
+For the logo,i found it too large so i scaled it to 50%.
+
+Next is the audio spectrum,you right click,then new then solid.Leave all settings as default and press ok.
+
+On the toolbar,go to effects tab,under generate,audio spectrum.Then change both colors to white.Set the audio layer to your choice of audio/music.This links your music with your audio spectrum
+
+I then played around with the rest of the settings as i observed the changes that it effected.
+
+Upon satisfaction,i needed to wrap it around the logo.I added an effect by the name polar cordinates which is under the distort tab.
+
+Set its interpolation to 100% and type of conversion to the first option "rect to polar"
+
+CHange the scale to be precisely in line with the logo,for my case was around 74 and 75%.
+
+Next we need to mirror the left side to be the same on the right side.To do this i added an effect called "mirror" still under the distort tab and the reflection center to be 960
+
+We need to make the logo bounce abit sychroniously with the audio.
+
+First you right click on the audio layer,under keyframe assistance,convert to keyframes
+
+Once created,under effects,delete the right and left channels since we need both.
+
+Next,create an adjustment layer which will add a magnify effect.Change the center to 9600,magnification to 100
+
+We now need to make the magnification synchronous with the timeline keyframes,so we left click it together with "Alt"
+
+This will give you an expression.In here you type 100 + and drag this to slider then *0.
+
+next i dragged the background image to the timeline and scaled it up a bit
+
+It was now time to render the 10 min video.I wanted it to be absolutely perfect,customized to best video qualities to render.
+
+Then came my shock,the time remaining,15 hours.I left the machne running the whole night for it to complete rendering.
+
+Once it was done,i played the video,i must say it was superb,fantasic and any other good adjective you can think of.
+
+but i realized it was kind of taking time to buffer at some points,then i decided to check its properties.Guys you wont believe this but it was 108 gb of space.a 10 minute video of 108gb!
 
 
-<<<<<<< HEAD
-=======
-Now you know how to format a bootable USB to normal but you can use this method to recover any other USB flash drive which stopped working or does not work correctly most likely you will be able to restore this flash drive to its normal state and it will start working as a new.
->>>>>>> de5e302ca6dca4816745dc587408f75a112e1d6f
+Nasio Fontaine - Black Tuesday
+Kings And Comrades - Life Is Alright (New Song 2018)
+Magic - Rude (Reggae Remix) 2015
+
